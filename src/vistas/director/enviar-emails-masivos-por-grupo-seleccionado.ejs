@@ -1,0 +1,20 @@
+<form class="card form-card inline-form" method="GET">
+  <select name="id_carrera">
+    <% carreras.forEach(c => { %>
+      <option value="<%= c.id_carrera %>" <%= String(idCarrera)===String(c.id_carrera)?'selected':'' %>><%= c.nombre %></option>
+    <% }) %>
+  </select>
+  <button class="btn" type="submit">Cargar grupo</button>
+</form>
+<form class="card form-card" method="POST">
+  <input type="hidden" name="id_carrera" value="<%= idCarrera %>" />
+  <label>Destinatarios</label>
+  <div class="checkbox-list">
+    <% destinatarios.forEach(d => { %>
+      <label><input type="checkbox" name="ids_persona" value="<%= d.id_persona || '' %>" /> <%= d.nombre %> <%= d.apellido %> - <%= d.email %></label>
+    <% }) %>
+  </div>
+  <label>Asunto</label><input name="asunto" required />
+  <label>Mensaje</label><textarea name="mensaje" rows="5" required></textarea>
+  <button class="btn" type="submit">Registrar envío</button>
+</form>

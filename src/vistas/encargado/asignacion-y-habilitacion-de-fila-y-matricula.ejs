@@ -1,0 +1,12 @@
+<form class="card form-card" method="POST">
+  <label>Aspirante</label>
+  <select name="id_aspirante" required>
+    <option value="">Selecciona un aspirante</option>
+    <% aspirantes.forEach(a => { %><option value="<%= a.id_aspirante %>"><%= a.nombre_completo %> - <%= a.email %></option><% }) %>
+  </select>
+  <div class="grid grid-2">
+    <div><label>Número de fila</label><input type="number" name="numero_fila" min="1" required /></div>
+    <div><label>Carrera</label><select name="id_carrera" required><option value="">Selecciona</option><% carreras.forEach(c => { %><option value="<%= c.id_carrera %>"><%= c.nombre %></option><% }) %></select></div>
+  </div>
+  <button class="btn" type="submit">Asignar y habilitar</button>
+</form>

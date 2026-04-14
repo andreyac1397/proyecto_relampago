@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= titulo %> | Relámpago</title>
+  <link rel="stylesheet" href="/css/global.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <% if (usuario) { %>
+      <aside class="sidebar">
+        <div class="brand">Relámpago</div>
+        <nav class="menu">
+          <a href="/">Inicio</a>
+          <% if (usuario.rol === 'Aspirante') { %>
+            <a href="/aspirante/panel">Panel</a>
+            <a href="/aspirante/habilitar-uso-matricula">Habilitar uso de matrícula</a>
+            <a href="/aspirante/completar-datos-personales-carrera">Completar datos personales y carrera elegida</a>
+            <a href="/aspirante/indicar-si-matriculo-o-no">Indicar si matriculó o no</a>
+          <% } %>
+          <% if (usuario.rol === 'Encargado' || usuario.rol === 'Administrador') { %>
+            <a href="/encargado/panel">Panel</a>
+            <a href="/encargado/asignacion-y-habilitacion-de-fila-y-matricula">Asignación y habilitación de fila y matrícula</a>
+            <a href="/encargado/ver-listado-de-citas-asignadas-por-carrera">Ver listado de citas asignadas por carrera</a>
+            <a href="/encargado/consultar-matricula-o-correo-por-email-y-telefono">Consultar matrícula o correo por email y teléfono</a>
+            <a href="/encargado/filtrar-estudiantes-matriculados-o-no-matriculados">Filtrar estudiantes matriculados o no matriculados</a>
+            <a href="/encargado/enviar-correos-electronicos">Enviar correos electrónicos</a>
+          <% } %>
+          <% if (usuario.rol === 'Director' || usuario.rol === 'Administrador') { %>
+            <a href="/director/panel">Panel</a>
+            <a href="/director/consultar-matriculados-de-su-carrera">Consultar matriculados de su carrera</a>
+            <a href="/director/enviar-emails-masivos-por-grupo-seleccionado">Enviar emails masivos por grupo seleccionado</a>
+          <% } %>
+        </nav>
+      </aside>
+    <% } %>
+
+    <main class="content <%= !usuario ? 'full' : '' %>">
+      <header class="topbar">
+        <div>
+          <h1><%= titulo %></h1>
+          <p class="muted">Sistema de gestión del aspirante</p>
+        </div>
+        <div class="topbar-actions">
+          <% if (usuario) { %>
+            <span class="chip"><%= usuario.nombre_completo %> · <%= usuario.rol %></span>
+            <form action="/auth/logout" method="POST">
+              <button class="btn btn-secondary" type="submit">Salir</button>
+            </form>
+          <% } else { %>
+            <a class="btn" href="/auth/login">Iniciar sesión</a>
+          <% } %>
+        </div>
+      </header>
+
+      <% if (mensajeExito && mensajeExito.length) { %>
+        <div class="alert success"><%= mensajeExito[0] %></div>
+      <% } %>
+      <% if (mensajeError && mensajeError.length) { %>
+        <div class="alert danger"><%= mensajeError[0] %></div>
+      <% } %>
+      <% if (errores && errores.length) { %>
+        <div class="alert warning">
+          <strong>Errores:</strong>
+          <ul>
+            <% errores.forEach(error => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <section class="page">
+        <%- body %>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<div class="card table-card">
+  <table>
+    <thead><tr><th>Carrera</th><th>Nombre</th><th>Fecha</th><th>Hora inicio</th><th>Hora fin</th><th>Estado</th></tr></thead>
+    <tbody>
+      <% citas.forEach(item => { %>
+        <tr><td><%= item.carrera || 'Sin carrera' %></td><td><%= item.nombre %> <%= item.apellido %></td><td><%= item.fecha.toISOString().slice(0,10) %></td><td><%= item.hora_inicio %></td><td><%= item.hora_fin %></td><td><%= item.estado %></td></tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

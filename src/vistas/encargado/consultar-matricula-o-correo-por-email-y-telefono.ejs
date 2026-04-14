@@ -1,0 +1,14 @@
+<form class="card form-card inline-form" method="GET">
+  <input name="texto" value="<%= texto %>" placeholder="Busca por email o teléfono" />
+  <button class="btn" type="submit">Buscar</button>
+</form>
+<div class="card table-card">
+  <table>
+    <thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Estado</th><th>Carrera</th><th>Fila</th></tr></thead>
+    <tbody>
+      <% resultados.forEach(r => { %>
+      <tr><td><%= r.nombre %> <%= r.apellido %></td><td><%= r.email %></td><td><%= r.telefono %></td><td><%= r.estado_matricula %></td><td><%= r.carrera || 'Sin carrera' %></td><td><%= r.numero_fila || 'N/A' %></td></tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
