@@ -15,9 +15,8 @@
           <a href="/">Inicio</a>
           <% if (usuario.rol === 'Aspirante') { %>
             <a href="/aspirante/panel">Panel</a>
-            <a href="/aspirante/habilitar-uso-matricula">Habilitar uso de matrícula</a>
+            <a href="/aspirante/habilitar-uso-matricula">Solicitar matrícula</a>
             <a href="/aspirante/completar-datos-personales-carrera">Completar datos personales y carrera elegida</a>
-            <a href="/aspirante/indicar-si-matriculo-o-no">Indicar si matriculó o no</a>
           <% } %>
           <% if (usuario.rol === 'Encargado' || usuario.rol === 'Administrador') { %>
             <a href="/encargado/panel">Panel</a>

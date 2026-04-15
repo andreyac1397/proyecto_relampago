@@ -1,5 +1,116 @@
+<h3>Resumen general del proceso</h3>
 <div class="grid grid-3">
-  <div class="card stat"><span>Estado</span><strong><%= resumen?.estado_matricula || 'Sin datos' %></strong></div>
-  <div class="card stat"><span>Fila</span><strong><%= resumen?.numero_fila || 'No asignada' %></strong></div>
-  <div class="card stat"><span>Habilitado</span><strong><%= resumen?.habilitado ? 'Sí' : 'No' %></strong></div>
+  <div class="card stat">
+    <span>Estado general</span>
+    <strong><%= resumen?.estado_matricula || 'Sin datos' %></strong>
+  </div>
+
+  <div class="card stat">
+    <span>Número de fila</span>
+    <strong><%= resumen?.numero_fila || 'No asignada' %></strong>
+  </div>
+
+  <div class="card stat">
+    <span>Solicitud habilitada</span>
+    <strong><%= resumen?.habilitado ? 'Sí' : 'No' %></strong>
+  </div>
+</div>
+
+<div class="card form-card">
+
+  <h3>Detalle de tu información</h3>
+
+  <% if (resumen?.datos_completos) { %>
+
+    <h4>Datos personales</h4>
+    <p><strong>Estado de datos:</strong> completos ✔</p>
+    <p><strong>Nombre:</strong> <%= resumen.nombre %> <%= resumen.apellido %></p>
+    <p><strong>Email:</strong> <%= resumen.email %></p>
+    <p><strong>Teléfono:</strong> <%= resumen.telefono %></p>
+    <p><strong>Carrera seleccionada:</strong> <%= resumen.carrera_matriculada || 'No definida' %></p>
+
+    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #ddd;">
+
+    <h4>Información de la cita asignada</h4>
+    <p>
+      <strong>Estado de la cita:</strong>
+      <span style="color:<%= resumen?.estado_cita === 'Asignada' ? 'green' : (resumen?.estado_cita === 'Cancelada' ? 'red' : 'orange') %>">
+        <%= resumen?.estado_cita || 'Pendiente' %>
+      </span>
+    </p>
+
+    <p>
+      <strong>Fecha de la cita:</strong>
+      <%= resumen?.fecha_cita
+        ? new Date(resumen.fecha_cita).toLocaleDateString('es-CR')
+        : 'No asignada' %>
+    </p>
+
+    <p>
+      <strong>Hora de inicio:</strong>
+      <%= resumen?.hora_inicio
+        ? new Date(resumen.hora_inicio).toLocaleTimeString('es-CR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          })
+        : 'No asignada' %>
+    </p>
+
+    <p>
+      <strong>Hora de finalización:</strong>
+      <%= resumen?.hora_fin
+        ? new Date(resumen.hora_fin).toLocaleTimeString('es-CR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          })
+        : 'No asignada' %>
+    </p>
+
+    <p>
+      <strong>Fecha en que solicitaste la cita:</strong>
+      <%= resumen?.fecha_habilitacion
+        ? new Date(resumen.fecha_habilitacion).toLocaleString('es-CR', {
+            dateStyle: 'short',
+            timeStyle: 'short'
+          })
+        : 'No registrada' %>
+    </p>
+
+    <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #ddd;">
+
+    <h4>Estado de matrícula formal</h4>
+    <p>
+      <strong>Estado actual de matrícula:</strong>
+      <span style="color:<%= resumen?.estado_matricula_formal === 'Matriculado' ? 'green' : (resumen?.estado_matricula_formal === 'No matriculado' ? 'red' : 'orange') %>">
+        <%= resumen?.estado_matricula_formal || 'Pendiente' %>
+      </span>
+    </p>
+
+    <p>
+      <strong>Fecha de matrícula real:</strong>
+      <%= resumen?.fecha_matricula
+        ? new Date(resumen.fecha_matricula).toLocaleString('es-CR', {
+            dateStyle: 'short',
+            timeStyle: 'short'
+          })
+        : 'No realizada' %>
+    </p>
+
+  <% } else { %>
+
+    <h4>Datos personales</h4>
+    <p style="color:red;">
+      <strong>Datos personales no registrados ❌</strong>
+    </p>
+
+    <p>
+      Debes completar tus datos antes de solicitar una cita de matrícula.
+    </p>
+
+    <a href="/aspirante/completar-datos-personales-carrera" class="btn">
+      Completar datos
+    </a>
+
+  <% } %>
+
 </div>

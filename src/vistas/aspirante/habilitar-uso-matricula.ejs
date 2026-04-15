@@ -1,7 +1,36 @@
 <div class="card form-card">
-  <p>Usa este módulo para el caso de uso <strong>Habilitar uso de matrícula</strong>.</p>
-  <p class="muted">Estado actual: <strong><%= resumen?.habilitado ? 'Habilitado' : 'No habilitado' %></strong></p>
-  <form method="POST">
-    <button class="btn" type="submit">Habilitar ahora</button>
+
+  <p>
+    <strong>Solicitar una cita de matrícula</strong>.
+  </p>
+
+  <p class="muted">
+    Estado actual:
+    <strong>
+      <%= resumen?.habilitado ? 'Cita solicitada / En cola para asignación' : 'No solicitado' %>
+    </strong>
+  </p>
+
+  <form method="POST" action="/aspirante/habilitar-uso-matricula">
+    <button class="btn" type="submit">
+      Solicitar cita de matrícula
+    </button>
   </form>
+
+  <!-- 🔴 MENSAJE SI NO HA COMPLETADO DATOS -->
+  <% if (!resumen?.datos_completos) { %>
+    <p class="muted" style="color:red;">
+      Debes completar tus datos personales antes de solicitar la cita.
+    </p>
+  <% } %>
+
+  <!-- 🟢 MENSAJE SI YA SOLICITÓ -->
+  <% if (resumen?.habilitado) { %>
+
+    <p class="muted">
+      Ya solicitaste tu cita. Estás en cola para la asignación de fecha y hora según el orden de fila.
+    </p>
+
+  <% } %>
+
 </div>

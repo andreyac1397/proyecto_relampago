@@ -1,10 +1,26 @@
-<form class="card form-card" method="POST">
+<form class="card form-card" method="POST" action="/aspirante/completar-datos">
   <div class="grid grid-2">
-    <div><label>Nombre</label><input name="nombre" required /></div>
-    <div><label>Apellido</label><input name="apellido" required /></div>
-    <div><label>Email</label><input name="email" type="email" required /></div>
-    <div><label>Teléfono</label><input name="telefono" required /></div>
+    <div>
+      <label>Nombre</label>
+      <input name="nombre" required />
+    </div>
+
+    <div>
+      <label>Apellido</label>
+      <input name="apellido" required />
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input name="email" type="email" required />
+    </div>
+
+    <div>
+      <label>Teléfono</label>
+      <input name="telefono" required />
+    </div>
   </div>
+
   <label>Carrera elegida</label>
   <select name="id_carrera" required>
     <option value="">Selecciona una carrera</option>
@@ -12,5 +28,6 @@
       <option value="<%= c.id_carrera %>"><%= c.nombre %></option>
     <% }) %>
   </select>
+
   <button class="btn" type="submit">Guardar datos</button>
 </form>

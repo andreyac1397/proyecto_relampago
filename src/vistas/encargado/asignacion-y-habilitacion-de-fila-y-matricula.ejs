@@ -1,12 +1,43 @@
-<form class="card form-card" method="POST">
-  <label>Aspirante</label>
-  <select name="id_aspirante" required>
-    <option value="">Selecciona un aspirante</option>
-    <% aspirantes.forEach(a => { %><option value="<%= a.id_aspirante %>"><%= a.nombre_completo %> - <%= a.email %></option><% }) %>
-  </select>
-  <div class="grid grid-2">
-    <div><label>Número de fila</label><input type="number" name="numero_fila" min="1" required /></div>
-    <div><label>Carrera</label><select name="id_carrera" required><option value="">Selecciona</option><% carreras.forEach(c => { %><option value="<%= c.id_carrera %>"><%= c.nombre %></option><% }) %></select></div>
-  </div>
-  <button class="btn" type="submit">Asignar y habilitar</button>
-</form>
+<div class="card form-card">
+
+  <h2>Asignación de fecha y hora de matrícula</h2>
+  <p class="muted">
+    Seleccione un aspirante en fila y asigne su cita de matrícula.
+  </p>
+
+  <form method="POST" action="/encargado/asignacion-y-habilitacion-de-fila-y-matricula">
+
+    <label>Aspirante en fila</label>
+    <select name="id_aspirante" required>
+      <option value="">Selecciona un aspirante</option>
+      <% aspirantes.forEach(a => { %>
+        <option value="<%= a.id_aspirante %>">
+          Fila <%= a.numero_fila %> - <%= a.nombre_completo %> (<%= a.email %>)
+        </option>
+      <% }) %>
+    </select>
+
+    <div class="grid grid-3">
+      <div>
+        <label>Fecha de matrícula</label>
+        <input type="date" name="fecha" required />
+      </div>
+
+      <div>
+        <label>Hora de inicio</label>
+        <input type="time" name="hora_inicio" required />
+      </div>
+
+      <div>
+        <label>Hora de finalización</label>
+        <input type="time" name="hora_fin" required />
+      </div>
+    </div>
+
+    <button class="btn" type="submit">
+      Asignar cita de matrícula
+    </button>
+
+  </form>
+
+</div>
