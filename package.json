@@ -19,7 +19,8 @@
     "helmet": "^8.0.0",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
-    "mssql": "^11.0.1"
+    "mssql": "^11.0.1",
+    "nodemailer": "^8.0.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

@@ -3,14 +3,14 @@ const correoServicio = require('../servicios/correoServicio');
 
 async function panel(req, res, next) {
   try {
-    const carreras = await servicio.obtenerCarrerasDelDirector(req.session.usuario.id_persona);
+    const carreras = await servicio.obtenerCarrerasDelDirector(req.session.usuario.id_persona, req.session.usuario.rol);
     res.render('director/panel', { titulo: 'Panel del director', carreras });
   } catch (error) { next(error); }
 }
 
 async function vistaConsulta(req, res, next) {
   try {
-    const carreras = await servicio.obtenerCarrerasDelDirector(req.session.usuario.id_persona);
+    const carreras = await servicio.obtenerCarrerasConMatriculadosDelDirector(req.session.usuario.id_persona, req.session.usuario.rol);
     const idCarrera = req.query.id_carrera || carreras[0]?.id_carrera;
     const resultados = idCarrera ? await servicio.consultarMatriculadosPorCarrera(idCarrera) : [];
     res.render('director/consultar-matriculados-de-su-carrera', {
@@ -24,7 +24,7 @@ async function vistaConsulta(req, res, next) {
 
 async function vistaCorreoMasivo(req, res, next) {
   try {
-    const carreras = await servicio.obtenerCarrerasDelDirector(req.session.usuario.id_persona);
+    const carreras = await servicio.obtenerCarrerasConMatriculadosDelDirector(req.session.usuario.id_persona, req.session.usuario.rol);
     const idCarrera = req.query.id_carrera || carreras[0]?.id_carrera;
     const destinatarios = idCarrera ? await servicio.consultarMatriculadosPorCarrera(idCarrera) : [];
     res.render('director/enviar-emails-masivos-por-grupo-seleccionado', {
