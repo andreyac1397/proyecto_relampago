@@ -14,7 +14,35 @@
       <label><input type="checkbox" name="ids_persona" value="<%= d.id_persona || '' %>" /> <%= d.nombre %> <%= d.apellido %> - <%= d.email %></label>
     <% }) %>
   </div>
-  <label>Asunto</label><input name="asunto" required />
-  <label>Mensaje</label><textarea name="mensaje" rows="5" required></textarea>
+  <label>Plantilla Reutilizable</label>
+  <select id="selectorPlantilla" onchange="aplicarPlantilla()">
+    <option value="">-- Seleccione una plantilla --</option>
+    <option value="bienvenida">Bienvenido al Proceso de Admisión</option>
+    <option value="recordatorio">Recordatorio de Cita de Matrícula</option>
+    <option value="notificacion">Notificación de Admisión</option>
+  </select>
+  <label>Asunto</label><input name="asunto" id="campoAsunto" required />
+  <label>Mensaje</label><textarea name="mensaje" id="campoMensaje" rows="5" required></textarea>
   <button class="btn" type="submit">Registrar envío</button>
 </form>
+<script>
+  function aplicarPlantilla() {
+    const selector = document.getElementById('selectorPlantilla').value;
+    const asunto = document.getElementById('campoAsunto');
+    const mensaje = document.getElementById('campoMensaje');
+    
+    if (selector === 'bienvenida') {
+      asunto.value = 'Bienvenido al Proceso de Admisión';
+      mensaje.value = 'Estimado aspirante, hemos recibido su solicitud de ingreso con éxito. Pronto le notificaremos la fecha de su cita de matrícula.';
+    } else if (selector === 'recordatorio') {
+      asunto.value = 'Recordatorio de Cita de Matrícula';
+      mensaje.value = 'Le recordamos que tiene una cita de matrícula programada. Por favor sea puntual y presente la documentación requerida.';
+    } else if (selector === 'notificacion') {
+      asunto.value = 'Notificación de Admisión';
+      mensaje.value = 'Felicidades, le informamos que ha sido admitido exitosamente en la carrera de su preferencia.';
+    } else {
+      asunto.value = '';
+      mensaje.value = '';
+    }
+  }
+</script>

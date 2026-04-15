@@ -18,10 +18,11 @@ async function consultarMatriculadosPorCarrera(idCarrera) {
   const resultado = await ejecutarConsulta((request) => {
     request.input('id_carrera', parseInt(idCarrera, 10));
     return request.query(`
-      SELECT p.id_persona, p.nombre, p.apellido, p.email, p.telefono, m.estado, m.fecha_matricula
+      SELECT p.id_persona, p.nombre, p.apellido, p.email, p.telefono, m.estado, m.fecha_matricula, c.nombre AS carrera
       FROM Matricula m
       INNER JOIN Aspirante a ON a.id_aspirante = m.id_aspirante
       INNER JOIN Persona p ON p.id_persona = a.id_persona
+      INNER JOIN Carrera c ON c.id_carrera = m.id_carrera
       WHERE m.id_carrera = @id_carrera
       ORDER BY p.nombre, p.apellido
     `);

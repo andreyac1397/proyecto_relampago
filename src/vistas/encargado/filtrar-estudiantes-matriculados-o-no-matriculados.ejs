@@ -1,7 +1,7 @@
 <form class="card form-card inline-form" method="GET">
   <select name="estado">
-    <option value="Matriculado" <%= estado==='Matriculado'?'selected':'' %>>Matriculado</option>
-    <option value="No matriculado" <%= estado==='No matriculado'?'selected':'' %>>No matriculado</option>
+    <option value="Matriculado" <%= estado==='Matriculado'?'selected':'' %>>SI (Matriculado)</option>
+    <option value="No matriculado" <%= estado==='No matriculado'?'selected':'' %>>NO (No matriculado)</option>
     <option value="Pendiente" <%= estado==='Pendiente'?'selected':'' %>>Pendiente</option>
   </select>
   <button class="btn" type="submit">Filtrar</button>

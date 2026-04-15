@@ -8,10 +8,10 @@
 </form>
 <div class="card table-card">
   <table>
-    <thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Estado</th><th>Fecha matrícula</th></tr></thead>
+    <thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Carrera</th><th>Estado</th><th>Fecha matrícula</th></tr></thead>
     <tbody>
       <% resultados.forEach(r => { %>
-      <tr><td><%= r.nombre %> <%= r.apellido %></td><td><%= r.email %></td><td><%= r.telefono %></td><td><%= r.estado %></td><td><%= r.fecha_matricula ? r.fecha_matricula.toISOString().slice(0,10) : 'N/A' %></td></tr>
+      <tr><td><%= r.nombre %> <%= r.apellido %></td><td><%= r.email %></td><td><%= r.telefono %></td><td><%= r.carrera %></td><td><%= r.estado %></td><td><%= r.fecha_matricula ? r.fecha_matricula.toISOString().slice(0,10) : 'N/A' %></td></tr>
       <% }) %>
     </tbody>
   </table>
